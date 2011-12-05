@@ -4,7 +4,7 @@ require 'etc'
 
 home_directory = Etc.getpwuid.dir
 files = Dir.new('.').to_a
-files = files - ['.', '..', '.git', 'install.rb']
+files = files - ['.', '..', '.git', 'install.rb', 'README.md']
 
 puts "This will overwrite your current dotfiles. Are you sure (y/n)?"
 response = STDIN.gets
