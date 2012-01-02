@@ -1,3 +1,4 @@
 --type-add=ruby=.haml
+--type-add=ruby=.coffee
 --type-add=css=.less
 --ignore-dir=coverage
