@@ -28,9 +28,9 @@
   lg = log -p
   caa = commit -a --amend -C HEAD
 [merge]
-  tool = mvim
-[mergetool "mvim"]
-  cmd=/usr/local/bin/mvim -d -g $LOCAL $MERGED $REMOTE
+  tool = vim
+[mergetool "vim"]
+  cmd=/usr/local/bin/vim -d -g $LOCAL $MERGED $REMOTE
   keepbackup=false
 [url "git@github.com:"]
   insteadOf = "gh:"
@@ -46,23 +46,7 @@
   insteadOf = "gist:"
 [url "git@heroku.com:"]
   insteadOf = "heroku:"
-
 [help]
 	autocorrect = 5
 [core]
 	excludesfile = /Users/julien/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-
-[mergetool.ediff]
-    cmd = emacs --eval \" \
-(progn \
-  (setq ediff-quit-hook 'kill-emacs) \
-  (if (file-readable-p \\\"$BASE\\\") \
-      (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \
-                                       \\\"$BASE\\\" nil \\\"$MERGED\\\") \
-      (ediff-merge-files \\\"$LOCAL\\\" \\\"$REMOTE\\\" nil \\\"$MERGED\\\")))\"
