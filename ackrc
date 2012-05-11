@@ -1,4 +1,7 @@
 --type-add=ruby=.haml
 --type-add=ruby=.coffee
 --type-add=css=.less
+--type-add=css=.sass
+--type-add=css=.scss
 --ignore-dir=coverage
+--ignore-dir=log
