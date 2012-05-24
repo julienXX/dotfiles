@@ -20,7 +20,7 @@
   changed = green
   untracked = cyan
 [alias]
-  st = status -s
+  st = status -sb
   ci = commit
   br = branch
   co = checkout
@@ -46,6 +46,9 @@
 [core]
 	excludesfile = /Users/julien/.gitignore_global
 [merge]
-  tool = vimdiff
+  tool = mvim
 [push]
-	default = tracking
+  default = tracking
+[mergetool "mvim"]
+  cmd=/usr/local/bin/mvim -d -g $LOCAL $MERGED $REMOTE
+  keepbackup=false
