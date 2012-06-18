@@ -1,7 +1,7 @@
 [github]
 	user = julienXX
-	token = e8eda04536d1a3339818db5d06168a0f
-	oauth-token = 2461f99cd562a19fe0e08c73b3d5fd82c5ea2370
+  token = 70c3848ff9dbc4b370947653693044a783b9480e
+	oauth-token = 01af64363576cf7c053b5892674fe41ffebe4b8f
 [user]
 	email = julien@sideburns.eu
 	name = Julien Blanchard
