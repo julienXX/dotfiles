@@ -46,6 +46,7 @@
 	autocorrect = 5
 [core]
 	excludesfile = /Users/julien/.gitignore_global
+	editor = /Applications/Emacs.app/Contents/MacOS/Emacs
 [merge]
   tool = mvim
 [push]
