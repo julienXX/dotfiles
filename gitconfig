@@ -1,10 +1,8 @@
 [github]
-	user = julienXX
-  token = 70c3848ff9dbc4b370947653693044a783b9480e
-	oauth-token = 01af64363576cf7c053b5892674fe41ffebe4b8f
+  user = julienXX
 [user]
-	email = julien@sideburns.eu
-	name = Julien Blanchard
+  email = julien@sideburns.eu
+  name = Julien Blanchard
 [color]
   ui = auto
 [color "branch"]
