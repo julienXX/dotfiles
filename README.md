@@ -1,13 +1,14 @@
 What is it?
 ===========
 
-My dotfiles for Ack, Gem, Pow, Tmux, & Zsh.
+My dotfiles for Git, Ack, Gem, Pow, Tmux, & Zsh.
 
 Installation
 ============
 
-Clone the repo:
+- Clone the repo:
 `$ git clone https://github.com/julienXX/dotfiles.git`
 
-Run the installer:
-`$ cd dotfiles && ruby install.rb`
+- Alias all the stuff
+- Make a .git_template directory in ~/
+- Alias .git_template/hooks to the hooks directory
