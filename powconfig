@@ -1,3 +1,4 @@
 export PATH=/Users/julien/.rbenv/shims:/Users/julien/.rbenv/bin:$PATH
 export POW_TIMEOUT=3600
 export POW_WORKERS=2
+export RUBYOPT="-E utf-8"
