@@ -5,3 +5,5 @@
 --type-add=css=.scss
 --ignore-dir=coverage
 --ignore-dir=log
+--ignore-file=is:tags
+--ignore-file=is:TAGS
