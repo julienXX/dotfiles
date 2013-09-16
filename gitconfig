@@ -1,8 +1,9 @@
 [github]
   user = julienXX
+	oauth-token = 34817e65ad3b9bff8e1394c33973f0bd55fb5500
 [user]
   email = julien@sideburns.eu
-  name = Julien Blanchard
+	name = Julien Blanchard
 [color]
   ui = auto
 [color "branch"]
@@ -19,6 +20,10 @@
   changed = green
   untracked = cyan
 [alias]
+  ap = add -p
+  fe = fetch
+  su = submodule update --init
+  pushu = push --set-upstream origin HEAD
   st = status -sb
   ci = commit
   br = branch
@@ -45,18 +50,32 @@
 [core]
 	excludesfile = /Users/julien/.gitignore_global
 	editor = vim
-[merge]
-  tool = mvim
+[branch]
+	autosetuprebase = always
+	autosetupmerge = true
 [push]
-  default = tracking
-[mergetool "mvim"]
-  cmd=/usr/local/bin/mvim -d -g $LOCAL $MERGED $REMOTE
-  keepbackup=false
-[mergetool.ediff]
-   cmd = emacs --eval "\\(ediff-merge-files-with-ancestor \"$LOCAL\" \"$REMOTE\" \"$BASE\" nil \"$MERGED\"\\)"
+	default = upstream
+[merge]
+  tool = ediff
+[mergetool "ediff"]
+  cmd = emacs --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 [init]
 	templatedir = ~/.git_template
 [pull]
 	rebase = true
 [rerere]
-	enabled = 1
+	enabled = true
+[advice]
+	pushNonFastForward = false
+	statusHints = false
+	commitBeforeMerge = false
+	resolveConflict = false
+	detachedHead = false
+[diff]
+	renames = true
+[rebase]
+	autosquash = true
+[help]
+	autocorrect = 1
+[interactive]
+	singlekey = true
