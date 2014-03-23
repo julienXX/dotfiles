@@ -1,7 +1,7 @@
 What is it?
 ===========
 
-My dotfiles for Git, Ack, Gem, Pow, Tmux, & Zsh.
+My dotfiles for Git, Ack, Gem, Pow, Tmux, Leiningen & Zsh.
 
 Installation
 ============
