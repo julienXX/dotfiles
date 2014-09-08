@@ -28,7 +28,7 @@
   df = diff
   caa = commit -a --amend -C HEAD
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  vs = log --left-right --graph --cherry-pick --oneline
+  vs = log --left-right --graph --cherry-pick --oneline # usage: git vs branch1...branch2
   up = !git stash && git pull && git stash pop
 [url "git@github.com:"]
   insteadOf = "gh:"
