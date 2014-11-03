@@ -78,7 +78,4 @@
 	autocorrect = 1
 [interactive]
 	singlekey = true
-[github]
-	user = julienXX
-	password = Julien1980
-	oauth-token = a81a92298d9196a4ec8a8059acbbc37cd31aa568
+
