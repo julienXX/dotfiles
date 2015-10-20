@@ -30,6 +30,7 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   vs = log --left-right --graph --cherry-pick --oneline # usage: git vs branch1...branch2
   up = !git stash && git pull && git stash pop
+  lgrep = "!f() {  git log --all --grep=$1; }; f"
 [url "git@github.com:"]
   insteadOf = "gh:"
   pushInsteadOf = "github:"
