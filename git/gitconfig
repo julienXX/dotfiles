@@ -80,3 +80,5 @@
 [interactive]
 	singlekey = true
 
+[github]
+	user = julienXX

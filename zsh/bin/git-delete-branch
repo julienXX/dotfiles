@@ -1,0 +1,15 @@
+#!/bin/bash
+
+BRANCH=$1
+CURRENT_BRANCH=$(git symbolic-ref HEAD --short)
+
+if [ "$BRANCH" = "master" ]; then
+    echo "You can't delete master branch"
+elif [ "$BRANCH" = "$CURRENT_BRANCH" ]; then
+    echo "You can't delete the branch you're on"
+else
+    echo Deleting local branch "$BRANCH"
+    git branch -D $BRANCH
+    echo Deleting remote branch "$BRANCH"
+    git push origin --delete "$BRANCH"
+fi

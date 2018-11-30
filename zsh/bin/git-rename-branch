@@ -1,0 +1,16 @@
+#! /usr/bin/env zsh
+
+BRANCH=$1
+CURRENT_BRANCH=$(git symbolic-ref HEAD --short)
+
+if [ "$CURRENT_BRANCH" = "master" ]; then
+    echo "You can't rename master branch"
+elif [ "$CURRENT_BRANCH" = "dev" ]; then
+    echo "You can't rename dev branch"
+else
+    echo Renaming local branch "$CURRENT_BRANCH" to "$BRANCH"
+    git branch -m ${BRANCH}
+    echo Renaming remote branch "$CURRENT_BRANCH" to "$BRANCH"
+    git push origin :${CURRENT_BRANCH} ${BRANCH}
+    git push origin -u ${BRANCH}
+fi
