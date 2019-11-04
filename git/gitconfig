@@ -83,6 +83,5 @@
 
 [github]
 	user = julienXX
-	oauth-token = 32ac0e6de5f18f1e6ed7562f89e910c979b4c427
 [diff "sopsdiffer"]
 	textconv = sops -d
