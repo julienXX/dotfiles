@@ -31,6 +31,7 @@
   vs = log --left-right --graph --cherry-pick --oneline # usage: git vs branch1...branch2
   up = !git stash && git pull && git stash pop
   lgrep = "!f() {  git log --all --grep=$1; }; f"
+  tidy = !git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d
 [url "git@github.com:"]
   insteadOf = "gh:"
   pushInsteadOf = "github:"
@@ -82,3 +83,6 @@
 
 [github]
 	user = julienXX
+	oauth-token = 32ac0e6de5f18f1e6ed7562f89e910c979b4c427
+[diff "sopsdiffer"]
+	textconv = sops -d
