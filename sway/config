@@ -1,0 +1,227 @@
+# sway config file
+#
+
+output eDP-1 pos 0 0 res 1920x1080
+output HDMI-A-1 pos 1920 0 res 1920x1080
+
+input 1241:534:USB-HID_Keyboard {
+      xkb_options ctrl:nocaps,compose:ralt,caps:ctrl_modifier
+}
+
+input 1:1:AT_Translated_Set_2_keyboard {
+      xkb_options ctrl:nocaps,compose:ralt,caps:ctrl_modifier
+}
+
+input 1739:0:Synaptics_TM3288-003 {
+      tap enabled
+      natural_scroll enabled
+      dwt enabled
+      middle_emulation enabled
+}
+
+### Idle configuration
+#
+exec swayidle \
+   timeout 300 'swaylock -c 000000' \
+   timeout 600 'swaymsg "output eDP-1 HDMI-A-1 dpms off"' \
+   resume 'swaymsg "output eDP-1 HDMI-A-1 dpms on"' \
+   before-sleep 'swaylock -c 000000'
+
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:San Francisco Display Light 11
+
+########## Keybindings ##########
+
+### Backlight ###
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+
+### Media Player ###
+bindsym F5 exec playerctl play-pause
+bindsym F4 exec playerctl previous
+bindsym F6 exec playerctl next
+
+### Printscreen ###
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
+
+### Sound ###
+
+# Raise Volume
+Bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+# Lower Volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+# Toggle muting
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle-mute
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Focus follows mouse
+focus_follows_mouse no
+
+# start a terminal
+# bindsym $mod+Return exec gnome-terminal --hide-menubar --profile=i3
+bindsym $mod+Return exec xfce4-terminal
+# bindsym $mod+Return exec termite
+bindsym $mod+n exec spacefm
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi (a program launcher)
+# bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -fn 'San Francisco Display Light-10' -nb '#464D56' -sb '#B24D7A'"
+# bindsym $mod+d exec wofi -show drun
+
+bindsym $mod+d exec termite --name=launcher -e "bash -c 'compgen -c | grep -v fzf | sort -u | fzf --layout=reverse | xargs -r swaymsg -t command exec'"
+for_window [app_id="^launcher$"] floating enable, border none, opacity 0.8
+
+# change workspace
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+q focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+workspace 1 output HDMI-A-1
+workspace 2 output HDMI-A-1
+workspace 3 output eDP-1
+workspace 4 output eDP-1
+workspace 5 output eDP-1
+workspace 6 output HDMI-A-1
+
+set $wp1    "1:code"
+set $wp2    "2:term"
+set $wp3    "3:firefox"
+set $wp4    "4:slack"
+set $wp5    "5:mail"
+set $wp6    "6:chromium"
+set $wp7    "7:spotify"
+set $wp8    "8:8"
+set $wp9    "9:9"
+set $wp10   "10:10"
+
+# switch to workspace
+bindsym $mod+1 workspace $wp1
+bindsym $mod+2 workspace $wp2
+bindsym $mod+3 workspace $wp3
+bindsym $mod+4 workspace $wp4
+bindsym $mod+5 workspace $wp5
+bindsym $mod+6 workspace $wp6
+bindsym $mod+7 workspace $wp7
+bindsym $mod+8 workspace $wp8
+bindsym $mod+9 workspace $wp9
+bindsym $mod+0 workspace $wp10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $wp1
+bindsym $mod+Shift+2 move container to workspace $wp2
+bindsym $mod+Shift+3 move container to workspace $wp3
+bindsym $mod+Shift+4 move container to workspace $wp4
+bindsym $mod+Shift+5 move container to workspace $wp5
+bindsym $mod+Shift+6 move container to workspace $wp6
+bindsym $mod+Shift+7 move container to workspace $wp7
+bindsym $mod+Shift+8 move container to workspace $wp8
+bindsym $mod+Shift+9 move container to workspace $wp9
+bindsym $mod+Shift+0 move container to workspace $wp10
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# exit sway
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+set $bg-color 	         #B24D7A
+set $inactive-bg-color   #AEB2C3
+set $text-color          #f3f4f5
+set $inactive-text-color #464D56
+set $urgent-bg-color     #EDA870
+set $bar-bg-color        #464D56
+set $bar-text-color      #AEB2C3
+
+########## Gaps ##########
+
+gaps inner 10
+gaps outer 10
+
+########## Custom stuff ##########
+
+# no border
+default_border pixel
+
+# Floating apps
+for_window [class="Shutter"] floating enable
+
+# Suspend/Lock
+bindsym $mod+l exec swaylock -c 121212
+bindsym $mod+k exec systemctl suspend
+
+########## Autolaunch ##########
+exec nm-applet
+exec_always /usr/local/bin/mako --default-timeout 5000
+
+exec "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &"
+
+exec_always pkill waybar
+exec_always sleep 0.05 && waybar
+
+exec_always setxkbmap -option caps:ctrl_modifier -option compose:ralt
