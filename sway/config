@@ -2,29 +2,25 @@
 #
 
 output eDP-1 pos 0 0 res 1920x1080
-output HDMI-A-1 pos 1920 0 res 1920x1080
-
-input 1241:534:USB-HID_Keyboard {
-      xkb_options ctrl:nocaps,compose:ralt,caps:ctrl_modifier
-}
 
 input 1:1:AT_Translated_Set_2_keyboard {
       xkb_options ctrl:nocaps,compose:ralt,caps:ctrl_modifier
 }
 
-input 1739:0:Synaptics_TM3288-003 {
+input 2:7:SynPS/2_Synaptics_TouchPad {
       tap enabled
-      natural_scroll enabled
       dwt enabled
       middle_emulation enabled
+      accel_profile adaptive
+      pointer_accel 0.5
 }
 
 ### Idle configuration
 #
-exec swayidle \
-   timeout 300 'swaylock -c 000000' \
-   timeout 600 'swaymsg "output eDP-1 HDMI-A-1 dpms off"' \
-   resume 'swaymsg "output eDP-1 HDMI-A-1 dpms on"' \
+exec_always swayidle \
+   timeout 3000 'swaylock -c 000000' \
+   timeout 6000 'swaymsg "output * dpms off"' \
+   resume 'swaymsg "output * dpms on"' \
    before-sleep 'swaylock -c 000000'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -35,7 +31,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:San Francisco Display Light 11
+font pango:SFProDisplay-Light 11
 
 ########## Keybindings ##########
 
@@ -53,34 +49,25 @@ bindsym Print exec grim -g "$(slurp)" - | wl-copy
 
 ### Sound ###
 
-# Raise Volume
-Bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
-# Lower Volume
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%- && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
-# Toggle muting
-bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle-mute
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 5+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 5- unmute"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Focus follows mouse
-focus_follows_mouse no
+focus_follows_mouse yes
 
 # start a terminal
-# bindsym $mod+Return exec gnome-terminal --hide-menubar --profile=i3
-bindsym $mod+Return exec xfce4-terminal
-# bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 bindsym $mod+n exec spacefm
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-# bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -fn 'San Francisco Display Light-10' -nb '#464D56' -sb '#B24D7A'"
-# bindsym $mod+d exec wofi -show drun
-
-bindsym $mod+d exec termite --name=launcher -e "bash -c 'compgen -c | grep -v fzf | sort -u | fzf --layout=reverse | xargs -r swaymsg -t command exec'"
-for_window [app_id="^launcher$"] floating enable, border none, opacity 0.8
+bindsym $mod+d exec /usr/local/bin/f00sel
 
 # change workspace
 bindsym $mod+Tab workspace next
@@ -124,17 +111,10 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-workspace 1 output HDMI-A-1
-workspace 2 output HDMI-A-1
-workspace 3 output eDP-1
-workspace 4 output eDP-1
-workspace 5 output eDP-1
-workspace 6 output HDMI-A-1
-
 set $wp1    "1:code"
 set $wp2    "2:term"
 set $wp3    "3:firefox"
-set $wp4    "4:slack"
+set $wp4    "4:4"
 set $wp5    "5:mail"
 set $wp6    "6:chromium"
 set $wp7    "7:spotify"
@@ -216,12 +196,8 @@ bindsym $mod+l exec swaylock -c 121212
 bindsym $mod+k exec systemctl suspend
 
 ########## Autolaunch ##########
-exec nm-applet
-exec_always /usr/local/bin/mako --default-timeout 5000
-
-exec "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &"
-
+exec_always /bin/mako --default-timeout 5000
 exec_always pkill waybar
 exec_always sleep 0.05 && waybar
-
 exec_always setxkbmap -option caps:ctrl_modifier -option compose:ralt
+exec brightnessctl set 50%
