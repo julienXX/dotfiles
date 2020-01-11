@@ -66,8 +66,8 @@ bindsym $mod+n exec spacefm
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (a program launcher)
-bindsym $mod+d exec /usr/local/bin/f00sel
+# start wofi (a program launcher)
+bindsym $mod+d exec wofi --show drun -i
 
 # change workspace
 bindsym $mod+Tab workspace next
@@ -108,8 +108,8 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+q focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
+# make sticky (float on every workspace)
+bindsym $mod+m sticky toggle
 
 set $wp1    "1:code"
 set $wp2    "2:term"
