@@ -1,0 +1,39 @@
+window {
+    border-radius: 10px;
+    margin: 5px;
+    opacity: 0.8;
+    border: 2px solid black;
+    background-color: black;
+}
+
+#input {
+    margin: 5px;
+    border: 2px solid white;
+    background-color: white;
+}
+
+/* #inner-box { */
+/*     margin: 5px; */
+/*     border: 2px solid yellow; */
+/*     background-color: yellow; */
+/* } */
+
+/* #outer-box { */
+/*     margin: 5px; */
+/*     border: 2px solid green; */
+/*     background-color: green; */
+/* } */
+
+/* #scroll { */
+/*     margin: 5px; */
+/*     border: 2px solid orange; */
+/*     background-color: orange; */
+/* } */
+
+#text {
+    color: white;
+    margin-top: 5px;
+    margin-left: 10px;
+    /* border: 2px solid white; */
+    /* background-color: white; */
+}
