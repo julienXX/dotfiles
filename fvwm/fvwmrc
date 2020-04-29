@@ -20,7 +20,7 @@ AddToFunc "RestartFunction" "I" Module FvwmButtons
 +		"I" CursorMove 30 40
 
 *FvwmButtonsFore Grey
-*FvwmButtonsBack SteelBlue3
+*FvwmButtonsBack SteelBlue2
 *FvwmButtonsFont -adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*
 *FvwmButtonsGeometry 300x50-0-0
 *FvwmButtonsRows 1
@@ -142,9 +142,9 @@ Mouse 3		R    	A      	WindowList
 # Left is menu, right is minimise, maximise, close
 #     Button	Context Modifi 	Function
 Mouse 0		1       A       Menu Window-Ops Close
-Mouse 0		2    	A     	Close
-Mouse 0		4    	A     	Maximize-Func
-Mouse 0		6    	A     	Iconify
+Mouse 0		2    	A     	Maximize-Func
+Mouse 0		4    	A     	Iconify
+# Mouse 0		2    	A     	Close
 
 # Button 1 in Frame or Sides is a resize-or-raise, in Icons is a move or
 # de-iconify, and on Top does a move-or-raise
@@ -155,10 +155,10 @@ Mouse 1		T       A       Move-or-Raise
 
 # Button 2 in an Icon is de-iconify, in Corners/Sides/Titlebar gets Ops Menu
 #     Button	Context Modifi 	Function
-#Mouse 2 	I       A       Iconify
+Mouse 2 	I       A       Iconify
 Mouse 2 	FST     A       Menu Window-Ops Nop
 # Button 3 does a raise-lower on anything
-#Mouse 3 	TSIF    A       RaiseLower
+Mouse 3 	TSIF    A       RaiseLower
 
 ############################################################################
 # "are you sure?" for logout, reboot, and shutdown
@@ -203,10 +203,10 @@ Style "ShutdownVerify" NoTitle, NoHandles, BorderWidth 3
 # COLORS and FONTS and Styles
 #
 # window in focus
-HilightColor		linen SteelBlue4
+HilightColor linen IndianRed3
 
 # all other windows
-Style "*" Color linen SlateGrey
+Style "*" Color LightGrey/DimGrey
 
 # fonts for title bar and icon label
 WindowFont              -adobe-helvetica-medium-r-*-*-14-*-*-*-*-*-*-*
@@ -235,14 +235,8 @@ Style "*" SmartPlacement
 Style "*" RandomPlacement
 
 # window styles
+Style *           MWMButtons, !MWMFunctions, MWMDecor, HintOverride, !MWMBorders
 Style "Fvwm*"		NoTitle, Sticky, WindowListSkip, NoHandles, BorderWidth 0
-
-# close button, top right
-# AddButtonStyle 2 16 20x20@1 30x20@1 50x40@1 70x20@1 80x20@1 80x30@0 60x50@0 80x80@0 70x80@0 50x60@0 30x80@0 20x80@0 20x70@0 40x50@1 20x30@0 20x20@1
-# maximise button, to the left of close button
-# AddButtonStyle 4 Vector 4 50x25@1 75x75@0 25x75@0 50x25@1
-# minimise button, to the left of the maximise button
-# AddButtonStyle 6 Vector 4 50x75@1 25x25@1 75x25@1 50x75@0
 
 # make everything line up (snap) with each other. number is pixels proximity
 SnapAttraction 10
