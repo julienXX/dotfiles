@@ -5,8 +5,8 @@
 #################################################################
 
 # commented out for now as they aren't being used
-# IconPath        /usr/X11R6/include/X11/bitmaps
-# PixmapPath      /usr/X11R6/include/X11/pixmaps
+IconPath   /usr/local/share/icons/hicolor
+PixmapPath /usr/local/share/pixmaps/fvwm
 
 # FvwmButtons
 
@@ -27,6 +27,7 @@ AddToFunc "RestartFunction" "I" Module FvwmButtons
 
 *FvwmButtons(Swallow XClock 'Exec xclock -padding 0 -fg white -bg SteelBlue3 &')
 *FvwmButtons(Swallow(UseOld,NoKill) "xload" `Exec xload -title xload -bg SteelBlue3 -update 3 -nolabel &`)
+*FvwmButtons(Swallow XBattery 'Exec xbattery -title xbattery -bg SteelBlue3 -update 3 -nolabel &')
 *FvwmButtons(1x1 Frame 0 Swallow(UseOld) "FvwmPager" "Module FvwmPager 0 1")
 
 ##############################################################################
@@ -35,66 +36,84 @@ AddToFunc "RestartFunction" "I" Module FvwmButtons
 
 # This is the command menu for the left mouse button
 AddToMenu CommandMenu "Command Menu"  Title
-+	"Xterm"			 exec xterm &
-+	"Emacs"			 exec emacs &
-+	"Firefox"		 exec firefox &
-+	"Castor"		 exec castor &
-+	"Hexchat"		 exec hexchat &
-+ "Calculator" exec xcalc &
-+	"" 			Nop
-+       "SSH"        Popup SshMenu
-+       "Volume Control"        Popup VolumeMenu
-+	"" 			Nop
-+	"Restart fvwm"		Restart fvwm
-+	"Lock Screen"		exec xlock &
-+ 	"Reboot"		FvwmForm RebootVerify
-+ 	"Shutdown"		FvwmForm ShutdownVerify
-+ 	"Logout"		FvwmForm QuitVerify
++	"Xterm"			     exec xterm &
++	"File Manager"   exec rox ~/ &
++ "Development"    Popup DevMenu
++ "Internet"       Popup InternetMenu
++ "Tools"          Popup ToolsMenu
++	"" 			         Nop
++ "SSH"            Popup SshMenu
++ "Volume Control" Popup VolumeMenu
++	"" 			         Nop
++	"Restart fvwm"	 Restart fvwm
++	"Lock Screen"	   exec xlock &
++ "Reboot"		     FvwmForm RebootVerify
++ "Shutdown"		   FvwmForm ShutdownVerify
++ "Logout"		     FvwmForm QuitVerify
 
 # Window operations for the centre mouse button
 AddToMenu Global-Window-Ops    "Window Ops"    Title
-+       "Move"          Move-or-Raise2
-+       "Resize"        Resize-or-Raise2
-+       "Raise"         Raise
-+       "Lower"         Lower
-+       "(De)Iconify"   Iconify
-+       "(Un)Stick"     Stick
-+       "(Un)Maximize"  maximize_func
-+       ""              Nop
-+       "Delete"        Delete
-+       "Close"         Close
-+       "Destroy"       Destroy
-+       ""              Nop
-+       "Refresh Screen" Refresh
++ "Move"          Move-or-Raise2
++ "Resize"        Resize-or-Raise2
++ "Raise"         Raise
++ "Lower"         Lower
++ "(De)Iconify"   Iconify
++ "(Un)Stick"     Stick
++ "(Un)Maximize"  maximize_func
++ ""              Nop
++ "Delete"        Delete
++ "Close"         Close
++ "Destroy"       Destroy
++ ""              Nop
++ "Refresh Screen" Refresh
 
 # Window Ops for the top left of every window
 AddToMenu Window-Ops   "Move"          Move-or-Raise
-+       "Resize"        Resize-or-Raise
-+       "Raise/Lower"   RaiseLower
-+       "Iconify"       Iconify
-+       "(Un)Stick"     Stick
-+       ""              Nop
-+       "Delete"        Delete
-+       "Close"         Close
-+       "Destroy"       Destroy
++ "Resize"        Resize-or-Raise
++ "Raise/Lower"   RaiseLower
++ "Iconify"       Iconify
++ "(Un)Stick"     Stick
++ ""              Nop
++ "Delete"        Delete
++ "Close"         Close
++ "Destroy"       Destroy
++ ""              Nop
++ "Screenshot"    exec scrot -b -s -e 'mv $f ~/Downloads'
 
 AddToMenu VolumeMenu  "Volume Control"  Title
-+       "Volume 100%%"          exec mixerctl -q outputs.master=255
-+       "Volume  90%%"          exec mixerctl -q outputs.master=230
-+       "Volume  80%%"          exec mixerctl -q outputs.master=205
-+       "Volume  70%%"          exec mixerctl -q outputs.master=180
-+       "Volume  60%%"          exec mixerctl -q outputs.master=155
-+       "Volume  50%%"          exec mixerctl -q outputs.master=130
-+       "Volume  40%%"          exec mixerctl -q outputs.master=105
-+       "Volume  30%%"          exec mixerctl -q outputs.master=80
-+       "Volume  20%%"          exec mixerctl -q outputs.master=55
-+       "Volume  10%%"          exec mixerctl -q outputs.master=20
-+       "Volume   0%%"          exec mixerctl -q outputs.master=0
++ "Volume 100%%"          exec mixerctl -q outputs.master=255
++ "Volume  90%%"          exec mixerctl -q outputs.master=230
++ "Volume  80%%"          exec mixerctl -q outputs.master=205
++ "Volume  70%%"          exec mixerctl -q outputs.master=180
++ "Volume  60%%"          exec mixerctl -q outputs.master=155
++ "Volume  50%%"          exec mixerctl -q outputs.master=130
++ "Volume  40%%"          exec mixerctl -q outputs.master=105
++ "Volume  30%%"          exec mixerctl -q outputs.master=80
++ "Volume  20%%"          exec mixerctl -q outputs.master=55
++ "Volume  10%%"          exec mixerctl -q outputs.master=20
++ "Volume   0%%"          exec mixerctl -q outputs.master=0
 
 AddToMenu SshMenu  "SSH"  Title
-+       "typed-hole.org"        exec xterm -e ssh julien@typed-hole.org
-+       "circumlunar.space"     exec xterm -e ssh julienxx@zaibatsu.circumlunar.space
-+       "rawtext.club"          exec xterm -e ssh julienxx@rawtext.club
++ "typed-hole.org"        exec xterm -e ssh julien@typed-hole.org
++ "circumlunar.space"     exec xterm -e ssh julienxx@zaibatsu.circumlunar.space
++ "rawtext.club"          exec xterm -e ssh julienxx@rawtext.club
++ "sdf.org"               exec xterm -e ssh julienxx@tty.sdf.org
++ "9til.de"               exec xterm -e drawterm -h 9til.de -u glenda
+
+AddToMenu DevMenu  "Development"  Title
++	"Emacs"          exec emacs &
++	"Glade"          exec glade &
+
+AddToMenu InternetMenu  "Internet"  Title
++	"Firefox"        exec firefox &
++	"W3M"            exec xterm -geometry 130x50 -e w3m http://google.fr &
++	"Castor"         exec castor &
++	"Email"          exec xterm -geometry 120x30 -e aerc &
++	"IRC"            exec hexchat &
+
+AddToMenu ToolsMenu  "Tools"  Title
++ "Calculator"     exec xcalc &
++ "GIMP"           exec gimp &
 
 ############################################################################
 # menus and mouse actions
@@ -202,6 +221,11 @@ Style "ShutdownVerify" NoTitle, NoHandles, BorderWidth 3
 ############################################################################
 # COLORS and FONTS and Styles
 #
+
+Style *  BorderWidth 7, HandleWidth 7
+TitleStyle LeftJustified
+*FvwmIdent: Font  "-*-helvetica-bold-*-*-*-14-*-*-*-*-*-*-*"
+
 # window in focus
 HilightColor linen IndianRed3
 
@@ -209,7 +233,8 @@ HilightColor linen IndianRed3
 Style "*" Color LightGrey/DimGrey
 
 # fonts for title bar and icon label
-WindowFont              -adobe-helvetica-medium-r-*-*-14-*-*-*-*-*-*-*
+DefaultFont "-*-helvetica-bold-*-*-*-14-*-*-*-*-*-*-*"
+WindowFont "-*-helvetica-bold-*-*-*-14-*-*-*-*-*-*-*"
 IconFont                -adobe-helvetica-medium-r-*-*-14-*-*-*-*-*-*-*
 
 # icons go in bottom left
@@ -236,7 +261,7 @@ Style "*" RandomPlacement
 
 # window styles
 Style *           MWMButtons, !MWMFunctions, MWMDecor, HintOverride, !MWMBorders
-Style "Fvwm*"		NoTitle, Sticky, WindowListSkip, NoHandles, BorderWidth 0
+Style "Fvwm*"		  NoTitle, Sticky, WindowListSkip, NoHandles, BorderWidth 0
 
 # make everything line up (snap) with each other. number is pixels proximity
 SnapAttraction 10
@@ -244,6 +269,70 @@ SnapAttraction 10
 # SnapAttraction 10 Windows
 
 # alt-tabbing
-Key Tab A M Next (CurrentDesk !Iconic) Focus
+# Key Tab A M Next (CurrentDesk !Iconic) Focus
 # alt-shift-tabbing to reverse
 # Key Tab A SM Prev (CurrentDesk !Iconic) Focus
+
+Colorset 17 fg black, bg #808080, pixmap unknown.xpm
+
+Style "*" IconSize 48 48
+Style * IconBackgroundColorset 17
+Style * IconBackgroundRelief 2
+Style * IconBackgroundPadding 2
+Style * IconTitle, IndexedWindowName
+Style * WindowShadeSteps 0
+
+# Icons applications
+Style * IconOverride
+#Style * DecorateTransient
+Style xterm Icon utilities-terminal.xpm
+Style *HexChat Icon xchat.xpm
+Style Xfe* Icon Xfm.xpm
+Style *+T* Icon Xfm.xpm
+Style rox Icon Xfm.xpm
+Style *Firefox Icon mozilla.xpm
+Style gimp Icon gimp.xpm
+Style Castor* Icon castor.xpm
+Style *Thunderbird Icon internet-mail.xpm
+Style Remote Icon yax_ssh.xpm
+Style *Thumbs* Icon fm.xpm
+Style *player* Icon yax_audio.xpm
+Style *XnView* Icon yax_view.xpm
+Style *Viewer* Icon yax_view.xpm
+Style xfontsel Icon font_select.xpm
+Style xmcalendar Icon calendar.xpm
+Style Calculator* Icon Xcalc.xpm
+Style gmemusage* Icon gmemusage.xpm
+Style Xpdf Icon acroread.xpm
+Style *FvwmPager Icon yax_pager.xpm
+Style xmag Icon distort.xpm
+
+# Keyboard accelerators
+Key F1		A	M	Raise
+Key F2		A	M	Popup WindowMenu
+#Key F3		A	M	Lower
+Key F3		A	M	Move
+Key F3		A	C	Resize
+Key F4		A	M	Close
+Key Tab A M Windowlist (CurrentPage) root c c CurrentDesk SelectOnRelease Alt_L NoHotkeys NoCurrentDeskTitle NoGeometry CurrentAtEnd
+Key F5		A	M	Move
+Key Prior		A	C	Lower
+Key Next		A	C	Maximize 0 100
+Key F8		A	M	Resize
+Key F9		A	M	Maximize 0 100
+Key F10		A	M	Iconify
+# Key F11		A	M	WindowList 1
+# Key F12		A	N	WindowList 2
+Key F12		A	M	WindowShade
+
+SetEnv fvwm_icon_size 93
+Style * IconSize 90 70 -1 -1
+Style * IconBackgroundColorset 17
+Style * IconBackgroundRelief 2
+Style * IconBackgroundPadding 2
+Style * IconTitle, IndexedWindowName
+Style * IconFont "-*-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*"
+
+ButtonStyle 2 Vector 9 0+5px100-6p@3 100-7px100-6p@3 100-7px-0+4p@3 0+5px0+4p@3 0+5px100-5p@3 0+7px100-5p@2 0+8px100-5p@3 100-6px100-5p@3 100-6px-0+6p@3
+ButtonStyle 4 Vector 9 50-2px50+1p@3 50+2px50+1p@3 50+2px50-3p@3 50-2px50-3p@3 50-2px50+2p@3 50-0px50+2p@2 50-0px50+2p@3 50+3px50+2p@3 50+3px50-1p@3
+ButtonStyle 1 Vector 9 0+4px50+1p@3 100-6px50+1p@3 100-6px50-2p@3 0+4px50-2p@3 0+4px50+2@3 0+5px50+2p@2 0+6px50+2p@2 100-5px50+2p@3 100-5px50@3
