@@ -1,87 +1,92 @@
 [user]
-  email = julien@sideburns.eu
-	name = Julien Blanchard
+email = julien@typed-hole.org
+name = Julien Blanchard
 [color]
-  ui = auto
+ui = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+current = yellow reverse
+local = yellow
+remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+meta = yellow bold
+frag = magenta bold
+old = red bold
+new = green bold
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+added = yellow
+changed = green
+untracked = cyan
 [alias]
-  ap = add -p
-  fe = fetch
-  su = submodule update --init
-  pushu = push --set-upstream origin HEAD
-  st = status -sb
-  ci = commit
-  br = branch
-  co = checkout
-  df = diff
-  caa = commit -a --amend -C HEAD
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  vs = log --left-right --graph --cherry-pick --oneline # usage: git vs branch1...branch2
-  up = !git stash && git pull && git stash pop
-  lgrep = "!f() {  git log --all --grep=$1; }; f"
-  tidy = !git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d
+ap = add -p
+fe = fetch
+su = submodule update --init
+pushu = push --set-upstream origin HEAD
+st = status -sb
+ci = commit
+br = branch
+co = checkout
+df = diff
+caa = commit -a --amend -C HEAD
+lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+vs = log --left-right --graph --cherry-pick --oneline # usage: git vs branch1...branch2
+up = !git stash && git pull && git stash pop
+lgrep = "!f() {  git log --all --grep=$1; }; f"
+tidy = !git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d
 [url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
+insteadOf = "gh:"
+pushInsteadOf = "github:"
+pushInsteadOf = "git://github.com/"
 [url "git://github.com/"]
-  insteadOf = "github:"
+insteadOf = "github:"
 [url "git@gist.github.com:"]
-  insteadOf = "gst:"
-  pushInsteadOf = "gist:"
-  pushInsteadOf = "git://gist.github.com/"
+insteadOf = "gst:"
+pushInsteadOf = "gist:"
+pushInsteadOf = "git://gist.github.com/"
 [url "git://gist.github.com/"]
-  insteadOf = "gist:"
+insteadOf = "gist:"
 [url "git@heroku.com:"]
-  insteadOf = "heroku:"
+insteadOf = "heroku:"
 [help]
-	autocorrect = 5
+autocorrect = 5
 [core]
-	excludesfile = /Users/julien/.gitignore_global
-	editor = vim
+excludesfile = /Users/julien/.gitignore_global
+editor = vim
 [branch]
-	autosetuprebase = always
-	autosetupmerge = true
+autosetuprebase = always
+autosetupmerge = true
 [push]
-	default = upstream
+default = upstream
 [merge]
-  tool = ediff
+tool = ediff
 [mergetool "ediff"]
-  cmd = emacs --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
+cmd = emacs --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
 [init]
-	templatedir = ~/.git_template
+templatedir = ~/.git_template
 [pull]
-	rebase = true
+rebase = true
 [rerere]
-	enabled = true
+enabled = true
 [advice]
-	pushNonFastForward = false
-	statusHints = false
-	commitBeforeMerge = false
-	resolveConflict = false
-	detachedHead = false
+pushNonFastForward = false
+statusHints = false
+commitBeforeMerge = false
+resolveConflict = false
+detachedHead = false
 [diff]
-	renames = true
+renames = true
 [rebase]
-	autosquash = true
+autosquash = true
 [help]
-	autocorrect = 1
+autocorrect = 1
 [interactive]
-	singlekey = true
-
+singlekey = true
 [github]
-	user = julienXX
+user = julienXX
 [diff "sopsdiffer"]
-	textconv = sops -d
+textconv = sops -d
+[sendemail]
+smtpserver = mail.typed-hole.org
+smtpuser = julien@typed-hole.org
+smtpencryption = tls
+smtpserverport = 587
+
