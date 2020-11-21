@@ -1,5 +1,8 @@
-((magit-commit nil)
+((magit-am nil)
+ (magit-blame
+  ("-w"))
+ (magit-commit nil)
  (magit-gitignore nil)
- (magit-push nil
-             ("--force-with-lease"))
+ (magit-push
+  ("--force-with-lease"))
  (magit-rebase nil))

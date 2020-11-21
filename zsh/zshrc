@@ -12,6 +12,11 @@ function findrm() {
     find . -iname "$1" -exec rm -r {} \;
 }
 
+# 2FA
+function mfa () {
+    oathtool --base32 --totp "$(cat ~/.aws/julien.mfa)" | tee /dev/tty | wl-copy;
+}
+
 #########
 # COLORS
 #########
@@ -39,7 +44,7 @@ ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
 # PROMPT
 #########
 export PS1=$'
-%{$fg[blue]%}∴ %d%{$fg[yellow]%}$(~/bin/git-cwd-info)
+%{$fg[blue]%}∴ %d$(~/bin/git-cwd-info)
 %{$fg[blue]%}λ %{$reset_color%}'
 
 _lineup=$'\e[1A'
@@ -101,8 +106,8 @@ bindkey "\e[B" history-beginning-search-forward-end
 # ALIASES
 ##########
 
-alias ls='ls -G'
-alias ll='ls -lG'
+alias ls='ls --color'
+alias ll='ls -lah --color'
 alias duh='du -csh'
 
 # Git aliases
@@ -117,23 +122,15 @@ alias hb="hub browse"
 alias internet="ping 8.8.8.8"
 alias please='sudo $(fc -ln 0)'
 
+alias kfr="setxkbmap -layout fr -option ctrl:nocaps -option compose:ralt"
 alias kus="setxkbmap -layout us -option ctrl:nocaps -option compose:ralt"
 
 alias vpn="cd /home/julien/config/Jblanchard@50.200.182.250 && sudo openvpn Jblanchard@50.200.182.250.ovpn && cd -"
-alias ssh_content_staging="cd /home/julien/Code/content/rails && /home/julien/Code/sm-terraform/infra/staging/assume_staging_admin.sh eb ssh content-worker-staging && cd -"
-alias ssh_content_web_staging="cd /home/julien/Code/content/rails && /home/julien/Code/sm-terraform/infra/staging/assume_staging_admin.sh eb ssh content-web-staging && cd -"
-alias ssh_platform_staging="cd /home/julien/Code/platform/rails && /home/julien/Code/sm-terraform/infra/staging/assume_staging_admin.sh eb ssh platform-worker-staging && cd -"
-alias ssh_platform_web_staging="cd /home/julien/Code/platform/rails && /home/julien/Code/sm-terraform/infra/staging/assume_staging_admin.sh eb ssh platform-web-staging && cd -"
-alias ssh_content_production="cd /home/julien/Code/content/rails && /home/julien/Code/sm-terraform/infra/production/assume_production_admin.sh eb ssh content-worker-production && cd -"
-alias ssh_content_web_production="cd /home/julien/Code/content/rails && /home/julien/Code/sm-terraform/infra/production/assume_production_admin.sh eb ssh content-web-production && cd -"
-alias ssh_platform_production="cd /home/julien/Code/platform/rails && /home/julien/Code/sm-terraform/infra/production/assume_production_admin.sh eb ssh platform-worker-production && cd -"
-alias ssh_platform_web_production="cd /home/julien/Code/platform/rails && /home/julien/Code/sm-terraform/infra/production/assume_production_admin.sh eb ssh platform-web-production && cd -"
 
-#######
-# PATH
-#######
+alias docker_clean="sudo docker system prune --all --filter until=$(date -d "1 month ago" +%s)"
 
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/home/julien/bin:/usr/local/share/npm/bin:/usr/local/share/npm/lib/node_modules:/home/julien/.cask/bin:/home/julien/.cabal/bin:/home/julien/.local/bin:$PATH
+alias tilderadio='mpv https://radio.tildeverse.org/radio/8000/radio.ogg'
+alias tv='mpv http://baud.vision:21225/vcr --really-quiet'
 
 #######
 # MISC
@@ -143,8 +140,8 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # History
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.history
 
 export EDITOR=/usr/bin/vim
@@ -156,22 +153,30 @@ export USE_BUNDLER=force
 # Emacs mode
 bindkey -e
 
-# Stack binaries
-export PATH="$HOME/.local/bin:$PATH"
-
-# Rustup
-export PATH="$HOME/.cargo/bin:$PATH"
-
-# Racer
-export RUST_SRC_PATH="/home/julien/Code/rust/src"
-
 # Autojump
 . /usr/share/autojump/autojump.sh
 
 # RBEnv
-export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# AWS
+export AWS_BUCKET_NAME="sm-dev-temp"
+export AWS_REGION="eu-west-1"
+
+# Direnv
+eval "$(direnv hook zsh)"
+
+# Helm
+export HELM_HOST=localhost:44134
+
+# Go
+export GO111MODULE=on
+
+~/bin/keys.sh > /dev/null

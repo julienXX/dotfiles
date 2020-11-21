@@ -1,8 +1,13 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# Add GHC 7.10.1 to the PATH, via https://ghcformacosx.github.io/
-export GHC_DOT_APP="/Applications/ghc-7.10.1.app"
-if [ -d "$GHC_DOT_APP" ]; then
-  export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
-fi
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/home/julien/bin:/usr/local/share/npm/bin:/usr/local/share/npm/lib/node_modules:/home/julien/.cask/bin:/home/julien/.cabal/bin:/home/julien/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export RUST_SRC_PATH="/home/julien/Code/rust/src"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=/usr/lib/go-1.13/bin:$PATH
+export PLAN9=/home/julien/src/plan9port
+#export PATH=$PLAN9/bin:$PATH
+export PATH="$HOME/bin/elasticsearch-7.8.1/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
