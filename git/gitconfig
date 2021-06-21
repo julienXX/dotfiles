@@ -32,6 +32,13 @@ vs = log --left-right --graph --cherry-pick --oneline # usage: git vs branch1...
 up = !git stash && git pull && git stash pop
 lgrep = "!f() {  git log --all --grep=$1; }; f"
 tidy = !git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d
+cleanup = "!f() {\
+        git fetch -p &&\
+        git branch -vv | \
+        grep ': gone]' | \
+        grep -v '\\*' | \
+        awk '{ print $1; }' | xargs -r git branch -D; \
+        }; f"
 [url "git@github.com:"]
 insteadOf = "gh:"
 pushInsteadOf = "github:"
@@ -89,4 +96,3 @@ smtpserver = mail.typed-hole.org
 smtpuser = julien@typed-hole.org
 smtpencryption = tls
 smtpserverport = 587
-
