@@ -1,8 +1,9 @@
 set -x MOZ_ENABLE_WAYLAND 1
+set -x XDG_RUNTIME_DIR /tmp
 set -x XDG_SESSION_TYPE wayland
 set -x QT_QPA_PLATFORM wayland-egl
 set -x ELM_DISPLAY wl
-set -x LIBSEAT_BACKEND logind
+set -x LIBSEAT_BACKEND seatd
 
 fish_add_path /home/julien/.cask/bin
 
@@ -12,23 +13,6 @@ end
 
 function findrm
     find . -iname "$argv" -exec rm -r {} \;
-end
-
-function pkg
-    switch $argv[1]
-        case search
-	          xbps-query -Rs $argv[2]
-	      case sync
-            doas xbps-install -Su
-	      case add
-	          doas xbps-install -Su $argv[2]
-	      case remove
-	          doas xbps-remove -R $argv[2]
-	      case autoremove
-	          doas xbps-remove -Oo
-	      case '*'
-            printf 'Unknown command: %s\n' $argv[1]
-    end
 end
 
 alias psgrep="ps aux | grep"
