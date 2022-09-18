@@ -18,8 +18,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 80
-    lines: 25
+    columns: 135
+    lines: 40
 
   # Window position (changes require restart)
   #
@@ -102,21 +102,21 @@ tabspaces: 8
 font:
   # Normal (roman) font face
   normal:
-    family: Monaco
+    family: Monospace
     style: Regular
 
   # Bold font face
   bold:
-    family: Monaco
+    family: Monospace
     style: Bold
 
   # Italic font face
   italic:
-    family: Monaco
+    family: Monospace
     style: Italic
 
   # Point size
-  size: 7.0
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -241,7 +241,7 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: false
 
-  #url:
+  hints:
     # URL launcher
     #
     # This program is executed when clicking on a text which is recognized as a URL.
@@ -297,8 +297,8 @@ live_config_reload: true
 #   - (macOS) /bin/bash --login
 #   - (Linux) user login shell
 #   - (Windows) powershell
-shell:
-  program: /bin/fish
+#shell:
+#  program: /bin/fish
 #  args:
 #    - --login
 
