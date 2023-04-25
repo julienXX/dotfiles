@@ -7,19 +7,41 @@ xrdb -merge $HOME/.Xresources
 # needed for kvantum & qt5ct
 export QT_QPA_PLATFORMTHEME=qt5ct
 
+# Firefox and nvidia
+export LIBVA_DRIVER_NAME=vdpau
+export VDPAU_DRIVER=nvidia
+
+# Set background color
+# hsetroot -solid "Slate Gray"
+feh --bg-scale ~/Pictures/chihiro020.jpg
+
 # start dunst
 dunst &
 
 # start picom
 picom &
 
+# start volnoti
+volnoti &
+
+# start volnoti
+polkit-dumb-agent &
+
 # disable system beep
 xset b off
+
+xbindkeys
 
 # use caps lock as ctrl key
 setxkbmap -option ctrl:nocaps -option compose:ralt
 
-xbindkeys
+# clock in the upper right corner
+xclock -geometry 100x100-60+20 &
 
-# start WindowMaker!
-exec wmaker
+# stalonetray below
+stalonetray --geometry 1x2-20+20 --grow-gravity N --icon-gravity N -bg whitesmoke --icon-size=24 --kludges=force_icons_size --max-geometry 1x4 &
+
+mfa_tray &
+
+# start cwm
+# exec /home/julien/src/TMP/cwm/cwm
